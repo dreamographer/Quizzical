@@ -1,7 +1,11 @@
 "use client";
-import React, { useState } from "react";
-import { quiz } from "../data";
+import React, { useEffect, useState } from "react";
+import { questions } from "../data";
+import axios from "axios";
+import { AxiosResponse } from 'axios';
 export default function Quiz() {
+ 
+  const [allQuestions, setallQuestions] = useState(questions)
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSelectetedAnswer] = useState(false);
   const [selectedAnswerIndex, setSelectetedAnswerIndex] = useState<Number|null>(null);
@@ -12,10 +16,15 @@ export default function Quiz() {
     correctAnswers: 0,
     wrongAnswers: 0,
   });
-
-  const { questions } = quiz;
-  const { question, answers, correctAnswer } = questions[activeQuestion];
-
+  useEffect(()=>{ 
+    async function fetchData() {
+      let data: AxiosResponse = await axios.get('http://localhost:3000/master/api')
+      console.log(data.data)
+      setallQuestions(data.data)
+    }
+    fetchData()
+  }, [])
+  const { question, answers, correctAnswer } = allQuestions[activeQuestion];
   const onAnswerSelected = (ans: string, idx: number) => {
     setChecked(true)
     setSelectetedAnswerIndex(idx)
@@ -30,7 +39,7 @@ export default function Quiz() {
     setSelectetedAnswerIndex(null)
     setResult((prev)=>selectedAnswer?{
         ...prev,
-        score:prev.score+1,
+        score:prev.score+2,
         correctAnswers:prev.correctAnswers+1
       }:
       {
@@ -38,7 +47,7 @@ export default function Quiz() {
           wrongAnswers:prev.wrongAnswers+1
       }
     )
-    if(activeQuestion!=questions.length-1){
+    if (activeQuestion != allQuestions.length-1){
       setActiveQuestion((prev)=>prev+1)
     }else{
       setActiveQuestion(0)
@@ -52,14 +61,16 @@ export default function Quiz() {
       <div className="flex justify-center mt-20">
         <h1 className="text-4xl">Let the Game Begin</h1>
       </div>
-      <div>
+      <div className="text-center mt-7">
         <h2>
           Question: {activeQuestion + 1}
-          <span>/ {questions.length}</span>
+          <span>/ {allQuestions.length}</span>
         </h2>
       </div>
-      <div>{!showResult ? (
-        <div className="bg-gray-950 m-5 p-7">
+      <div>{!showResult ? (<div className="flex justify-center">
+
+
+        <div className="h-full w-1/2 rounded-lg shadow-xl bg-slate-950 p-10 ">
           <h1 className="text-center">{question}</h1>
           <div className="h-24 flex mt-5 flex-wrap w-full justify-center">
             {answers.map((ans, idx) => {
@@ -76,20 +87,23 @@ export default function Quiz() {
           <div className="flex justify-center ">
             {checked ?
               <button onClick={() => nextQuestion()} className="border p-2 mt-4 rounded-md bg-blue-700 hover:bg-blue-400a">
-                {activeQuestion == questions.length - 1 ? 'FINSIH' : 'NEXT'}
+                {activeQuestion == allQuestions.length - 1 ? 'FINSIH' : 'NEXT'}
               </button>
               :
               <button disabled className="border p-2 mt-4   rounded-md bg-gray-400 hover:bg-blue-400a">
-                {activeQuestion == questions.length - 1 ? 'FINSIH' : 'NEXT'}
+                {activeQuestion == allQuestions.length - 1 ? 'FINSIH' : 'NEXT'}
               </button>
             }
           </div>
         </div>
+        </div>
       ) : (
-        <div className="bg-white text-black p-10 mt-3">
+          <div className="flex justify-center">
+
+            <div className="bg-white m-10 p-10 w-1/2  rounded-xl text-black">
           <h2 className="text-xl text-bold">Result</h2>
-          <h3>Overall {(result.score/25)*100}%</h3>
-          <p>Total questions : <span>{questions.length}</span>
+            <h3>Overall {(result.score / (allQuestions.length*2))*100}%</h3>
+            <p>Total questions : <span>{allQuestions.length}</span>
           </p>
           <p>Total Score : <span>{result.score}</span>
           </p>
@@ -101,6 +115,7 @@ export default function Quiz() {
               Restart
             </button>
         </div>  
+        </div>
       )}</div>
 
     </>

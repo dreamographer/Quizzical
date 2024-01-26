@@ -1,6 +1,4 @@
-export const quiz = {
-  totalQuestions: 5,
-  questions: [
+export const questions= [
     {
       id: 1,
       question: "What is your Name",
@@ -25,5 +23,4 @@ export const quiz = {
       answers: ["sam", "ram", "kailas", "Ashwin"],
       correctAnswer: "Ashwin",
     },
-  ],
-};
+  ]
