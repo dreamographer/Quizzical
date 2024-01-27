@@ -4,7 +4,12 @@ import { questions } from "../data";
 import axios from "axios";
 import { AxiosResponse } from 'axios';
 export default function Master() {
-    const [allQuestions, setallQuestions] = useState(questions)
+    const [allQuestions, setallQuestions] = useState<{
+        id: number;
+        question: string;
+        answers: string[];
+        correctAnswer: string;
+    }[]|[]>([])
     const [question, setQuestion] = useState<string>('')
     const [option1, setOption1] = useState<string>('')
     const [option2, setOption2] = useState<string>('')
@@ -14,14 +19,23 @@ export default function Master() {
     const [addUser,setAddUser]=useState(false)
     const handleSubmit =async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const update = await axios.post('http://localhost:3000/master/api', { id: allQuestions.length + 1, question: question, answers: [option1, option2, option3, option4], correctAnswer: answer }, {
+        const update = await axios.post('http://localhost:3000/master/api', { id: allQuestions?.length + 1, question: question, answers: [option1, option2, option3, option4], correctAnswer: answer }, {
             headers: {
                 'Content-Type': 'application/json',
             },
         });
         setallQuestions(update.data);
-        
+        setQuestion('')
+        setOption1('')
+        setOption2('')
+        setOption3('')
+        setOption4('')
     }
+    const handleDelete=async(id:number)=>{
+        const update = await axios.delete(`http://localhost:3000/master/api/${id}`);
+        setallQuestions(update.data);
+    }
+
     useEffect(() => {
         async function fetchData() {
             let data: AxiosResponse = await axios.get('http://localhost:3000/master/api')
@@ -37,18 +51,18 @@ export default function Master() {
             </div>
             <div className="flex justify-center">
 
-            <div className="bg-white m-10 p-10 w-1/2  rounded-xl text-black">
+            <div className="bg-white m-10 p-10 rounded-xl text-black">
                 <h3 className="text-center font-medium text-xl">Current Questions</h3>
                 {allQuestions.map((qes, idx) => {
-                    return (<div key={idx} className="grid  grid-cols-3 p-5">
+                    return (<div key={idx} className="p-3">
                         <div className="col-start-2">
                             <p >Question : {qes.question}</p>
                             <p >options : {qes.answers.map((opt) => `${opt},`)}</p>
                             <p >Answer : {qes.correctAnswer}</p>
                         </div>
-                        {/* <div>
-                            Edit
-                        </div> */}
+                        <div>
+                            <button onClick={()=>handleDelete(qes.id)}>DELETE</button>
+                        </div>
                     </div>
                     )
                 })}
@@ -60,22 +74,22 @@ export default function Master() {
             <div className="flex justify-center">
 
             
-            <div className="h-full w-1/2 rounded-lg shadow-xl bg-slate-950 p-10 ">
+            <div className="h-full w-3/4 mt-5 rounded-lg shadow-xl bg-slate-950 p-10 ">
                 <form onSubmit={(e) => handleSubmit(e)}>
                     <div className="text-black justify-center gap-5 mt-5 flex items-center flex-col">
                             <label className="text-white" htmlFor="question ">Enter the question</label>
                         <div className=" gap-7">
-                            <input onChange={(e) => setQuestion(e.target.value)} type="text" className="w-80 h-9 rounded-md p-4" name="question" id="question" />
+                            <input value={question} onChange={(e) => setQuestion(e.target.value)} type="text" className="w-80 h-9 rounded-md p-4" name="question" id="question" />
                         </div>
                             <label className="text-white" htmlFor="options">Provide the Options</label>
                         <div className="flex   flex-wrap justify-center gap-6">
-                            <input  onChange={e=>setOption1(e.target.value)}  type="text" className="w-80 h-9 rounded-md p-4" name="option1" />
-                            <input onChange={e => setOption2(e.target.value)} type="text" className="w-80 h-9 rounded-md p-4" name="option2" />
-                            <input onChange={e => setOption3(e.target.value)} type="text" className="w-80 h-9 rounded-md p-4" name="option3" />
-                            <input onChange={e => setOption4(e.target.value)} type="text" className="w-80 h-9 rounded-md p-4" name="option4" />
+                            <input value={option1} onChange={e=>setOption1(e.target.value)}  type="text" className="w-80 h-9 rounded-md p-4" name="option1" />
+                            <input value={option2} onChange={e => setOption2(e.target.value)} type="text" className="w-80 h-9 rounded-md p-4" name="option2" />
+                            <input value={option3} onChange={e => setOption3(e.target.value)} type="text" className="w-80 h-9 rounded-md p-4" name="option3" />
+                            <input value={option4} onChange={e => setOption4(e.target.value)} type="text" className="w-80 h-9 rounded-md p-4" name="option4" />
                         </div>
                         <label className="text-white" htmlFor="answer">Choose The correct Answer</label>
-                        <select name="answer" className=" text-black  rounded-md p-4" onChange={(e) => setAnswer(e.target.value)} >
+                        <select  name="answer" className=" text-black  rounded-md p-4" onChange={(e) => setAnswer(e.target.value)} >
                             <option  value='' selected disabled>Choose Your Answer</option>
                             {option1&&<option  defaultValue={option1}>{option1}</option>}
                                 {option2 && <option  defaultValue={option2}>{option2}</option>}
