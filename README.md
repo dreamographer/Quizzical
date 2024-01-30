@@ -1,5 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+# Quizzical
+
+Quizzical is a quiz application built with Next.js. It allows quiz masters to add new questions and students to answer them. The project is styled with Tailwind CSS and developed using TypeScript.
+
+## Features
+
+- Quiz Master Side: Quiz masters can add new questions.
+- Student Side: Students can answer the questions.
+
+## Tech Stack
+
+- **Frontend**: Next.js, Tailwind CSS, TypeScript
 ## Getting Started
 
 First, run the development server:
