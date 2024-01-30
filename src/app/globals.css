@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 body {
   background-image: url('/blue-question-mark-background-with-text-space-quiz-symbol-vector.jpg');
  background-size: cover;

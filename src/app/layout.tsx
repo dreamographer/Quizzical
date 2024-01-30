@@ -1,6 +1,4 @@
 import "./globals.css";
-
-import Head from 'next/head';
 export const metadata = {
   title: {
     default:'NExt APP'
@@ -15,14 +13,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
-      <link rel="preconnect" href="https://fonts.googleapis.com" />
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-      <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
 
-      </Head>
       <body className="w-full  text-white font-[poppins] font-medium ">{children}</body>
     </html>
   )
 }
+
+
 
