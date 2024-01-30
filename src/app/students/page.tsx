@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { AxiosResponse } from 'axios';
 export default function Quiz() {
-
+  const URL: string = process.env.NEXT_PUBLIC_API_URL || ''
   const [allQuestions, setallQuestions] = useState<{
     id: number;
     question: string;
@@ -24,7 +24,7 @@ export default function Quiz() {
   useEffect(() => {
     async function fetchData() {
       try {
-        let data: AxiosResponse = await axios.get('http://localhost:3000/master/api')
+        let data: AxiosResponse = await axios.get(URL)
         setallQuestions(data.data)
 
       } catch (error) {
@@ -84,31 +84,31 @@ export default function Quiz() {
         loading ?
           <div className="flex justify-center">
 
-            <div className="h-full  w-1/2 rounded-lg shadow-xl bg-slate-950 p-10 ">
+            <div className="h-full bg-blue-700/45 backdrop-blur-xl w-1/2 rounded-lg shadow-xl  p-10 ">
               <div className="flex animate-pulse justify-center">
               <h2 className="w-36 text-center bg-gray-300 h-6 rounded-md "></h2>
 
               </div>
               <div className="flex mt-5 animate-pulse flex-wrap">
-                <button className="border  bg-gray-800 h-10  rounded-sm text-center w-1/2"></button>
-                <button className="border  bg-gray-800  h-10 rounded-sm text-center w-1/2"></button>
-                <button className="border  bg-gray-800 h-10 rounded-sm text-center w-1/2"></button>
-                <button className="border  bg-gray-800 h-10 rounded-sm text-center w-1/2"></button>
+                <button className="border  bg-blue-700/15 h-10  rounded-sm text-center w-1/2"></button>
+                <button className="border  bg-blue-700/15  h-10 rounded-sm text-center w-1/2"></button>
+                <button className="border  bg-blue-700/15 h-10 rounded-sm text-center w-1/2"></button>
+                <button className="border  bg-blue-700/15 h-10 rounded-sm text-center w-1/2"></button>
           </div>
               <div className="flex mt-5 animate-pulse justify-center ">
-                <button className="border w-10  bg-gray-800 h-10  rounded-sm"></button>
+                <button className="border w-16 bg-blue-700/45 h-10   rounded-sm"></button>
                 </div>
 
          </div>
         </div>
           : <div>{!showResult ? (<div className="flex justify-center">
-            <div className="h-full w-1/2 rounded-lg shadow-xl bg-slate-950 p-10 ">
+            <div className="h-full  w-1/2 rounded-lg shadow-xl bg-blue-700/45 backdrop-blur-xl p-10 ">
               <h1 className="text-center">{question}</h1>
               <div className="h-24 flex mt-5 flex-wrap w-full justify-center">
                 {answers && answers.map((ans, idx) => {
                   return (
                     <button onClick={() => onAnswerSelected(ans, idx)}
-                      className={`border ${selectedAnswerIndex == idx ? 'bg-slate-400 text-black' : ''} hover:bg-slate-200 hover:text-black rounded-sm text-center w-1/2`}
+                      className={`border ${selectedAnswerIndex == idx ? 'bg-slate-400 bg-blue-700/45' : ''} hover:bg-slate-200 hover:text-black rounded-sm text-center w-1/2`}
                       key={idx}
                     >
                       {ans}
@@ -132,7 +132,7 @@ export default function Quiz() {
           ) : (
             <div className="flex justify-center">
 
-              <div className="bg-white m-10 p-10 w-1/2  rounded-xl text-black">
+                <div className=" bg-blue-700/45 backdrop-blur-xl m-10 p-10 w-1/2  rounded-xl text-white">
                 <h2 className="text-xl text-bold">Result</h2>
                 <h3>Overall {(result.score / (allQuestions.length * 2)) * 100}%</h3>
                 <p>Total questions : <span>{allQuestions.length}</span>

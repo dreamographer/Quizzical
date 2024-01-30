@@ -1,26 +1,19 @@
-export const questions= [
-    {
-      id: 1,
-      question: "What is your Name",
-      answers: ["sam", "ram", "las", "Ashwin"],
-      correctAnswer: "Ashwin",
-    },
-    {
-      id: 2,
-      question: "What is your Age",
-      answers: ["samnthose", "ram", "las", "Ashwin"],
-      correctAnswer: "Ashwin",
-    },
-    {
-      id: 3,
-      question: "What is your Gender",
-      answers: ["sam", "ramRagav", "las", "Ashwin"],
-      correctAnswer: "Ashwin",
-    },
-    {
-      id: 4,
-      question: "What is your Bla",
-      answers: ["sam", "ram", "kailas", "Ashwin"],
-      correctAnswer: "Ashwin",
-    },
-  ]
+export const questions = [
+  {
+    id: 1,
+    question: "Who is the Prime minister of India",
+    answers: [
+      "Akash",
+      "Ramesh chennitala",
+      "Pinarayi vijayan",
+      "Narendra Modi",
+    ],
+    correctAnswer: "Narendra Modi",
+  },
+  {
+    id: 2,
+    question: "What is Your Name",
+    answers: ["samnthose", "ram", "las", "Ashwin"],
+    correctAnswer: "Ashwin",
+  },
+];
