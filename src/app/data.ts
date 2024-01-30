@@ -10,10 +10,4 @@ export const questions = [
     ],
     correctAnswer: "Narendra Modi",
   },
-  {
-    id: 2,
-    question: "What is Your Name",
-    answers: ["samnthose", "ram", "las", "Ashwin"],
-    correctAnswer: "Ashwin",
-  },
 ];

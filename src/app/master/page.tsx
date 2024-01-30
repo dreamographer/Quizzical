@@ -80,14 +80,14 @@ export default function Master() {
                             <div className="text-black justify-center gap-5 mt-5 flex items-center flex-col">
                                 <label className="text-white" htmlFor="question ">Enter the question</label>
                                 <div className=" gap-7">
-                                    <input required value={question} onChange={(e) => setQuestion(e.target.value)} type="text" className="w-80 h-9 rounded-md p-4" name="question" id="question" />
+                                    <input required value={question} onChange={(e) => setQuestion(e.target.value)} type="text" className=" md:w-80 h-9 rounded-md p-4" name="question" id="question" />
                                 </div>
                                 <label className="text-white" htmlFor="options">Provide the Options</label>
                                 <div className="flex   flex-wrap justify-center gap-6">
-                                    <input value={option1} onChange={e => setOption1(e.target.value)} type="text" className="w-80 h-9 rounded-md p-4" name="option1" required />
-                                    <input value={option2} onChange={e => setOption2(e.target.value)} type="text" className="w-80 h-9 rounded-md p-4" name="option2" required />
-                                    <input value={option3} onChange={e => setOption3(e.target.value)} type="text" className="w-80 h-9 rounded-md p-4" name="option3" required />
-                                    <input value={option4} onChange={e => setOption4(e.target.value)} type="text" className="w-80 h-9 rounded-md p-4" name="option4" required />
+                                    <input value={option1} onChange={e => setOption1(e.target.value)} type="text" className="md:w-80 h-9 rounded-md p-4" name="option1" required />
+                                    <input value={option2} onChange={e => setOption2(e.target.value)} type="text" className="md:w-80 h-9 rounded-md p-4" name="option2" required />
+                                    <input value={option3} onChange={e => setOption3(e.target.value)} type="text" className="md:w-80 h-9 rounded-md p-4" name="option3" required />
+                                    <input value={option4} onChange={e => setOption4(e.target.value)} type="text" className="md:w-80 h-9 rounded-md p-4" name="option4" required />
                                 </div>
                                 <label className="text-white" htmlFor="answer">Choose The correct Answer</label>
                                 <select required name="answer" className=" text-black  rounded-md p-4" onChange={(e) => setAnswer(e.target.value)} >

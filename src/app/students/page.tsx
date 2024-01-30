@@ -84,16 +84,16 @@ export default function Quiz() {
         loading ?
           <div className="flex justify-center">
 
-            <div className="h-full bg-blue-700/45 backdrop-blur-xl w-1/2 rounded-lg shadow-xl  p-10 ">
+            <div className="h-full bg-blue-700/45 backdrop-blur-xl md:w-1/2 rounded-lg shadow-xl  p-10 ">
               <div className="flex animate-pulse justify-center">
               <h2 className="w-36 text-center bg-gray-300 h-6 rounded-md "></h2>
 
               </div>
-              <div className="flex mt-5 animate-pulse flex-wrap">
-                <button className="border  bg-blue-700/15 h-10  rounded-sm text-center w-1/2"></button>
-                <button className="border  bg-blue-700/15  h-10 rounded-sm text-center w-1/2"></button>
-                <button className="border  bg-blue-700/15 h-10 rounded-sm text-center w-1/2"></button>
-                <button className="border  bg-blue-700/15 h-10 rounded-sm text-center w-1/2"></button>
+              <div className=" md:flex mt-5 md:flex-wrap animate-pulse flex-wrap">
+                <button className="border  bg-blue-700/15 h-10  rounded-sm text-center w-full  md:w-1/2"></button>
+                <button className="border  bg-blue-700/15  h-10 rounded-sm text-center w-full md:w-1/2"></button>
+                <button className="border  bg-blue-700/15 h-10 rounded-sm text-center w-full md:w-1/2"></button>
+                <button className="border  bg-blue-700/15 h-10 rounded-sm text-center w-full md:m-0 md:w-1/2"></button>
           </div>
               <div className="flex mt-5 animate-pulse justify-center ">
                 <button className="border w-16 bg-blue-700/45 h-10   rounded-sm"></button>
@@ -102,13 +102,13 @@ export default function Quiz() {
          </div>
         </div>
           : <div>{!showResult ? (<div className="flex justify-center">
-            <div className="h-full  w-1/2 rounded-lg shadow-xl bg-blue-700/45 backdrop-blur-xl p-10 ">
+            <div className="h-full  md:w-1/2 rounded-lg shadow-xl bg-blue-700/45 backdrop-blur-xl p-10 ">
               <h1 className="text-center">{question}</h1>
-              <div className="h-24 flex mt-5 flex-wrap w-full justify-center">
+              <div className="h-24 md:flex mt-5 md:flex-wrap w-full justify-center">
                 {answers && answers.map((ans, idx) => {
                   return (
                     <button onClick={() => onAnswerSelected(ans, idx)}
-                      className={`border ${selectedAnswerIndex == idx ? 'bg-slate-400 bg-blue-700/45' : ''} hover:bg-slate-200 hover:text-black rounded-sm text-center w-1/2`}
+                      className={`border ${selectedAnswerIndex == idx ? 'bg-slate-400 bg-blue-700/45' : ''} hover:bg-slate-200 hover:text-black rounded-sm text-center w-full m-1 md:m-0 md:w-1/2`}
                       key={idx}
                     >
                       {ans}
@@ -118,11 +118,11 @@ export default function Quiz() {
               </div>
               <div className="flex justify-center ">
                 {checked ?
-                  <button onClick={() => nextQuestion()} className="border p-2 mt-4 rounded-md bg-blue-700 hover:bg-blue-400a">
+                  <button onClick={() => nextQuestion()} className="border p-2 md:mt-4 mt-16 rounded-md bg-blue-700 hover:bg-blue-400a">
                     {activeQuestion == allQuestions.length - 1 ? 'FINSIH' : 'NEXT'}
                   </button>
                   :
-                  <button disabled className="border p-2 mt-4   rounded-md bg-gray-400 hover:bg-blue-400a">
+                  <button disabled className="border p-2 md:mt-4 mt-16  rounded-md bg-gray-400 hover:bg-blue-400a">
                     {activeQuestion == allQuestions.length - 1 ? 'FINSIH' : 'NEXT'}
                   </button>
                 }
