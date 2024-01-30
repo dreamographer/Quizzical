@@ -132,7 +132,7 @@ export default function Quiz() {
           ) : (
             <div className="flex justify-center">
 
-                <div className=" bg-blue-700/45 backdrop-blur-xl m-10 p-10 w-1/2  rounded-xl text-white">
+                <div className=" bg-blue-700/45 backdrop-blur-xl md:m-10 m-0 p-10 w-full md:w-1/2  rounded-xl text-white">
                 <h2 className="text-xl text-bold">Result</h2>
                 <h3>Overall {(result.score / (allQuestions.length * 2)) * 100}%</h3>
                 <p>Total questions : <span>{allQuestions.length}</span>
