@@ -75,7 +75,7 @@ export default function Master() {
                 <div className="flex justify-center">
 
 
-                    <div className="h-full w-3/4 mt-5 rounded-lg shadow-xl bg-slate-950/55 backdrop-blur-xl p-10 ">
+                    <div className="h-full md:w-3/4 mt-5 rounded-lg shadow-xl bg-slate-950/55 backdrop-blur-xl p-10 ">
                         <form onSubmit={(e) => handleSubmit(e)}>
                             <div className="text-black justify-center gap-5 mt-5 flex items-center flex-col">
                                 <label className="text-white" htmlFor="question ">Enter the question</label>
