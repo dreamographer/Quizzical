@@ -1,4 +1,6 @@
 import "./globals.css";
+import { Plus_Jakarta_Sans } from "next/font/google";
+const JakarthaSans = Plus_Jakarta_Sans({ subsets: ["latin"] });
 export const metadata = {
   title: {
     default:'NExt APP'
@@ -13,7 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="w-full  text-white font-[poppins] font-medium ">{children}</body>
+      <body
+        className={`w-full  text-white font-medium ${JakarthaSans.className}`}
+      >
+        {children}
+      </body>
     </html>
-  )
+  );
 }
